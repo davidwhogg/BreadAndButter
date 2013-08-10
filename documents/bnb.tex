@@ -4,7 +4,7 @@
 \documentclass[letterpaper,12pt,preprint]{aastex}
 
 \newcommand{\project}[1]{\textsl{#1}}
-\newcommand{\sdss}{\project{SDSS}}
+\newcommand{\gaia}{\project{Gaia}}
 \newcommand{\given}{\,|\,}
 \newcommand{\transpose}[1]{{#1}^{\mathsf{T}}}
 \newcommand{\inverse}[1]{{#1}^{-1}}
@@ -22,17 +22,18 @@ Halo.  Here we show that even a single pair of stars---two stars that
 are known (for some non-kinematic reason) to be likely to be
 associated with one another at birth---could provide a significant
 constraint on the potential.  The inference is based on a
-probabilistic generative model that evolves forward in time to the
-present day from a disruption event in the past.  The time,
-six-volume, and phase-space location of the origin event are nuisance
-parameters in the model and marginalized away.  The method makes no
-assumption of integrability, works with finite or even large
-observational uncertainties, does not require all dimensions of phase
-space to be observed, handles non-zero probability that the two stars
-are not in fact associated, and generalizes naturally to larger
-numbers of stars and multiple independent structures.  Applications to
-the GD-1 cold stellar stream and current surveys for RR Lyrae stars in
-the Halo are discussed.
+probabilistic generative model---a likelihood function and priors over
+nuisance parameters---that evolves a past putative origin disruption
+event forward in time to the present day.  The time, six-volume, and
+phase-space location of the origin event are nuisance parameters in
+the model and marginalized away.  The method makes no assumption of
+integrability, works with finite or even large observational
+uncertainties, does not require all dimensions of phase space to be
+observed, handles non-zero probability that the two stars are not in
+fact associated, and generalizes naturally to larger numbers of stars
+and multiple independent structures.  Applications to the GD-1 cold
+stellar stream and current surveys for RR Lyrae stars in the Halo are
+discussed.
 \end{abstract}
 
 \keywords{
@@ -43,26 +44,98 @@ the Halo are discussed.
 
 \section{Introduction}
 
-...Cold streams contain tons of information.
+[Cold streams contain tons of information.]
 
-...GD-1 was fit as if it highlighted an orbit.  That is known to be
-wrong.
+[GD-1 was fit as if it highlighted an orbit.  That is known to be
+  wrong.]
 
-...In the halo, any phase-space structure might be long-lived.
-Chemical tagging could in principle illuminate it.
+[In the halo, any phase-space structure might be long-lived.  Chemical
+  tagging could in principle illuminate it.]
 
-...Chemical tagging will always only give probabilistic information.
-But what if it delivers somewhat confident information about small
-stellar families.
+[Chemical tagging will always only give probabilistic information.
+  But what if it delivers somewhat confident information about small
+  stellar families in the halo?]
 
-...Actions, angles, integrable, not, etc.  Can integrate forward in
-any potential, even a time-varying one.
+[Actions, angles, integrable, not, etc.  Can integrate in any
+  potential, even a time-varying one.  APW \& KVJ have used this to
+  ``run the clock back''.  Here we only let ourselves \emph{generate
+    the data}.]
+
+[Sometimes stellar samples might get extremely small.  For example,
+  \gaia\ might find some very low-mass cold stellar streams.  For
+  another, there might only be a coupld RRL stars in a particular
+  stream, but those RRL stars might be individually extremely well
+  measured in six-space.]
+
+[Obviously a small stellar sample can only tell you a small number of
+  things about the Milky Way potential.  The idea is---in the long
+  run---to construct likelihood functions for many small stellar
+  samples and in the end do inference by multiplying them together.
+  Duh!]
 
 \section{The model}
 
+The first idea is that there are $N\geq 2$ stars $n$ with \emph{true}
+phase-space 6-vector positions $X_n$.  Each 6-vector position is a
+column vector containing the position 3-vector and the velocity
+3-vector.  In reality, these phase-space positions are not directly
+observed but rather there are some data $D_n$ for each star, and a
+likelihood function $p(D_n\given X_n)$ that expresses the
+probabilistic relationship between the data and the true 6-vector
+position.  This description is agnostic about what these data might
+be, but we are imagining celestial positions, a parallax, proper
+motions, and a radial velocity, or some subset of those, all with
+(fairly well understood) uncertainties.  In some cases the distance
+information might come from photometry rather than astrometric
+parallax.
+
+The second idea is that these $N\geq 2$ stars $n$ have some finite
+prior probabilities $P_{nk}$ that they were once members of a compact
+phase-space structure labeled $k$ in the past.  At first we are
+thinking only about the existence of a single structure $k$, but in
+the end we can generalize to $K$ structures.  Technically these
+$P_{nk}$ ought to be the probabilities based on any data available
+prior to, or independently of, the phase-space information used in
+this experiment.  So, for example, if the stars are chosen from a box
+in chemical abundances, the probabilities $P_{nk}$ would be related to
+the probabilities that they obtain their similar chemical-abundances
+pattern inferences just by chance, without any relationship in their
+origin.  In many cases, the $P_{nk}$ are not known or hard to
+estimate; in these cases they can in fact be inferred (as we will
+demonstrate below).
+
 \section{Experiments}
 
+[Each experiment requires a description of how the fake data were
+  generated, what the likelihood function is, and posterior potential
+  information obtained.]
+
+[basic experiment: $N=2$, $K=1$, high $P_{nk}$, all dimensions
+  measured at best-present-day quality]
+
+[\gaia\ quality]
+
+[low $P_{nk}$, MW bg model]
+
+[unknown $P_{nk}$]
+
+[missing data]
+
+[$N>2$]
+
+[$K>1$]
+
+[Can we do a real experiment with two real RRL stars?]
+
 \section{Discussion}
+
+[What's unrealistic about what we have done?]
+
+[Issues about computation and scaling.]
+
+[Don't be afraid of nuisance parameters!]
+
+[Don't eschew low-dimensional constraints on the potential!]
 
 \acknowledgements
 Binney, Rix, Sanders
