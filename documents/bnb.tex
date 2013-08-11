@@ -6,6 +6,7 @@
 \newcommand{\project}[1]{\textsl{#1}}
 \newcommand{\gaia}{\project{Gaia}}
 \newcommand{\given}{\,|\,}
+\newcommand{\dd}{\mathrm{d}}
 \newcommand{\transpose}[1]{{#1}^{\mathsf{T}}}
 \newcommand{\inverse}[1]{{#1}^{-1}}
 
@@ -77,18 +78,18 @@ discussed.
 \section{The model}
 
 The first idea is that there are $N\geq 2$ stars $n$ with \emph{true}
-phase-space 6-vector positions $X_n$.  Each 6-vector position is a
-column vector containing the position 3-vector and the velocity
-3-vector.  In reality, these phase-space positions are not directly
-observed but rather there are some data $D_n$ for each star, and a
-likelihood function $p(D_n\given X_n)$ that expresses the
-probabilistic relationship between the data and the true 6-vector
-position.  This description is agnostic about what these data might
-be, but we are imagining celestial positions, a parallax, proper
-motions, and a radial velocity, or some subset of those, all with
-(fairly well understood) uncertainties.  In some cases the distance
-information might come from photometry rather than astrometric
-parallax.
+phase-space 6-vector positions $X_n^{(0)}$ (the ``$0$'' implies ``at the
+persent day'').  Each 6-vector position is a column vector containing
+the position 3-vector and the velocity 3-vector.  In reality, these
+phase-space positions are not directly observed but rather there are
+some data $D_n$ for each star, and a likelihood function $p(D_n\given
+X_n^{(0)})$ that expresses the probabilistic relationship between the data
+and the true 6-vector position.  This description is agnostic about
+what these data might be, but we are imagining celestial positions, a
+parallax, proper motions, and a radial velocity, or some subset of
+those, all with (fairly well understood) uncertainties.  In some cases
+the distance information might come from photometry rather than
+astrometric parallax.
 
 The second idea is that these $N\geq 2$ stars $n$ have some finite
 prior probabilities $P_{nk}$ that they were once members of a compact
@@ -108,32 +109,73 @@ demonstrate below).
 We want to perform inference \emph{without} building and
 running---within an MCMC chain---a fully dynamical model of a
 disrupting satellite in the Milky Way.  We therefore make a brutal
-approximation: We model the progenitor $k$ as a Gaissian blob in
-six-space composed of a spherical Gaussian of isotropic variance
-$\sigma_{kx}^2$ in the three positional dimensions and a spherical
-Gaussian of isotropic variance $\sigma_{kv}^2$ in the three velocity
-dimensions.  These two variances are combined into a diagonal $6\times
-6$ positive variance tensor $\Sigma_k$; that is, the variance tensor
-$\Sigma_k$ is specified with two scalar variances, $\sigma_{kx}^2$ and
-$\sigma_{kv}^2$.  This Gaussian blob in 6-space itself orbits on a
-gravitational orbit in the potential; that is it's mean 6-vector
-position in phase space as a function of time is determined by taking
-some 6-vector initial conditions $X_k$ and integrating through time
-along a gravitational orbit.  That is, in addition to the variance
-tensor $\Sigma_k$, the progenitor has a 6-vector position $X(t\given
-X_k)$, parameterized by time $t$ and initial conditions $X_k$.  For
-definiteness, we will define the present day to be $t=0$ (ignoring
-light-travel times, of course), such that all measurements of stars
-$D_n$ are made at $t=0$ and the progenitor initial conditions are set
-at $t=0$.
+approximation: We model the ``progenitor'' of phase-space structure
+$k$ as a Gaussian blob in six-space composed of a spherical Gaussian
+of isotropic variance $\sigma_{kx}^2$ in the three positional
+dimensions and a spherical Gaussian of isotropic variance
+$\sigma_{kv}^2$ in the three velocity dimensions.  These two variances
+are combined into a diagonal $6\times 6$ positive variance tensor
+$\Sigma_k$; that is, the variance tensor $\Sigma_k$ is specified with
+two scalar variances, $\sigma_{kx}^2$ and $\sigma_{kv}^2$.  This
+Gaussian blob in 6-space itself orbits on a gravitational orbit in the
+potential $\phi$; that is it's mean 6-vector position in phase space
+as a function of time is determined by taking some 6-vector initial
+conditions $X_k$ and integrating through time along a gravitational
+orbit.  That is, in addition to the variance tensor $\Sigma_k$, the
+progenitor has a 6-vector position $X(t\given X_k^{(0)},\phi)$, parameterized by
+time $t$ and initial conditions $X_k^{(0)}$ and potential $\phi$.  For definiteness, we will
+define the present day to be $t=0$ (ignoring light-travel times, of
+course), such that all measurements of stars $D_n$ are made at $t=0$
+and the progenitor initial conditions are set at $t=0$.
 
-[define $t_{nk}$ and the likelihood function for everything]
+With these ingredients, the model is the trivial generative model: The
+model is that (with finite prior probability $P_{nk}$), the star $n$
+was drawn from the Gaussian for progenitor $k$ at some time $t_{nk}$
+in the past.  This draw gave star $n$ a 6-vector position
+$X_n(t_{nk})$ back at time $t_{nk}$; this gets integrated forwards to
+today to give star $n$ a true 6-vector position $X_n^{(0)}$ today.  In the special case
+of definite assignment of star to substructure ($P_{nk}=1$), the
+probabilities look like these:
+\begin{eqnarray}
+p(D_n, X_n^{(0)}\given t_{nk}, X_k^{(0)}, \Sigma_k, \phi) &=&
+  p(D_n\given X_n^{(0)})\,N(X_n(t_{nk}\given X_n^{(0)}, \phi)\given X_k(t_{nk}\given X_k^{(0)}, \phi), \Sigma_k)
+\quad ,
+\end{eqnarray}
+where we have used that the transformation between $X_n(0)$ and
+$X_n(t_{nk})$ is deterministic (given a potential $\phi$), made use of
+Louisville's theorem (so no Jacobian appears), and defined $N(x\given
+m, V)$ to be the Gaussian pdf for $x$ given mean $m$ and variance $V$.
+We want to marginalize out the nuisance parameters, which looks
+something like this:
+\begin{eqnarray}
+p(D_n\given t_{nk}, X_k^{(0)}, \Sigma_k, \phi) &=&
+  \int p(D_n, X_n^{(0)}\given t_{nk}, X_k^{(0)}, \Sigma_k, \phi)\,\dd X_n^{(0)}
+\\
+p(D_n\given X_k^{(0)}, \Sigma_k, \phi) &=&
+  \int p(D_n\given t_{nk}, X_k^{(0)}, \Sigma_k, \phi)
+  \,p(t_{nk})\,\dd t_{nk}
+\\
+p(D\given X_k^{(0)}, \Sigma_k, \phi) &=&
+  \prod_{n=1}^N p(D_n\given X_k^{(0)}, \Sigma_k, \phi)
+\\
+p(D\given \phi) &=&
+  \int p(D\given X_k^{(0)}, \Sigma_k, \phi)\,p(X_k^{(0)}, \Sigma_k)\,\dd X_k^{(0)}\,\dd\Sigma_k
+\quad ,
+\end{eqnarray}
+where $D$ is the set of all data $D_n$, the integral over $t_{nk}$
+must be performed seperately for every star $n$, but the integrals
+over the progenitor properties $X_k^{(0)}$ and $\Sigma_k$ are
+performed just once for the whole sample, because these parameters are
+shared by every star.
 
-[priors on all easy nuisance parameters]
+[technically this likelihood is good for one star.  Why do we require
+  two?  Degeneracies.]
 
-[Milky Way ``background'' model]
+[priors on all nuisance parameters.]
 
-[priors on all hard nuisance parameters]
+[Milky Way ``background'' model.]
+
+[Generalization to multiple phase-space structures.]
 
 \section{Experiments}
 
