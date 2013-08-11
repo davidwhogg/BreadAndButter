@@ -59,7 +59,8 @@ discussed.
 [Actions, angles, integrable, not, etc.  Can integrate in any
   potential, even a time-varying one.  APW \& KVJ have used this to
   ``run the clock back''.  Here we only let ourselves \emph{generate
-    the data}.]
+    the data}.  Why is an objective based on past collisions not the
+  same as assuming that the stars are on the same orbit?]
 
 [Sometimes stellar samples might get extremely small.  For example,
   \gaia\ might find some very low-mass cold stellar streams.  For
@@ -104,6 +105,27 @@ origin.  In many cases, the $P_{nk}$ are not known or hard to
 estimate; in these cases they can in fact be inferred (as we will
 demonstrate below).
 
+We want to perform inference \emph{without} building and
+running---within an MCMC chain---a fully dynamical model of a
+disrupting satellite in the Milky Way.  We model the progenitor $k$ as
+a Gaissian blob in six-space composed of a spherical Gaussian of
+isotropic variance $\sigma_{kx}^2$ in the three positional dimensions
+and a spherical Gaussian of isotropic variance $\sigma_{kv}^2$ in the
+three velocity dimensions.  These two variances are combined into a
+diagonal $6\times 6$ positive variance tensor $\Sigma_k$; that is, the
+variance tensor $\Sigma_k$ is specified with two scalar variances,
+$\sigma_{kx}^2$ and $\sigma_{kv}^2$.  This Gaussian blob in 6-space
+itself orbits on a gravitational orbit in the potential; that is it's
+mean 6-vector position in phase space as a function of time is
+determined by taking some 6-vector initial conditions $X_k$ and
+integrating through time along a gravitational orbit.  That is, in
+addition to the variance tensor $\Sigma_k$, the progenitor has a
+6-vector position $X(t\given X_k)$, parameterized by time $t$ and
+initial conditions $X_k$.  For definiteness, we will define the
+present day to be $t=0$ (ignoring light-travel times, of course), such
+that all measurements of stars $D_n$ are made at $t=0$ and the
+progenitor initial conditions are set at $t=0$.
+
 \section{Experiments}
 
 [Each experiment requires a description of how the fake data were
@@ -129,7 +151,11 @@ demonstrate below).
 
 \section{Discussion}
 
-[What's unrealistic about what we have done?]
+[What's unrealistic about what we have done?  The kinematic model of
+  the progenitor is exceedingly simplistic; why are we okay with it
+  nonetheless but what could we do to improve it?  Related to this,
+  the progenitor doesn't shrink with time (as it should).  What's up
+  with that?]
 
 [Issues about computation and scaling.]
 
