@@ -107,24 +107,33 @@ demonstrate below).
 
 We want to perform inference \emph{without} building and
 running---within an MCMC chain---a fully dynamical model of a
-disrupting satellite in the Milky Way.  We model the progenitor $k$ as
-a Gaissian blob in six-space composed of a spherical Gaussian of
-isotropic variance $\sigma_{kx}^2$ in the three positional dimensions
-and a spherical Gaussian of isotropic variance $\sigma_{kv}^2$ in the
-three velocity dimensions.  These two variances are combined into a
-diagonal $6\times 6$ positive variance tensor $\Sigma_k$; that is, the
-variance tensor $\Sigma_k$ is specified with two scalar variances,
-$\sigma_{kx}^2$ and $\sigma_{kv}^2$.  This Gaussian blob in 6-space
-itself orbits on a gravitational orbit in the potential; that is it's
-mean 6-vector position in phase space as a function of time is
-determined by taking some 6-vector initial conditions $X_k$ and
-integrating through time along a gravitational orbit.  That is, in
-addition to the variance tensor $\Sigma_k$, the progenitor has a
-6-vector position $X(t\given X_k)$, parameterized by time $t$ and
-initial conditions $X_k$.  For definiteness, we will define the
-present day to be $t=0$ (ignoring light-travel times, of course), such
-that all measurements of stars $D_n$ are made at $t=0$ and the
-progenitor initial conditions are set at $t=0$.
+disrupting satellite in the Milky Way.  We therefore make a brutal
+approximation: We model the progenitor $k$ as a Gaissian blob in
+six-space composed of a spherical Gaussian of isotropic variance
+$\sigma_{kx}^2$ in the three positional dimensions and a spherical
+Gaussian of isotropic variance $\sigma_{kv}^2$ in the three velocity
+dimensions.  These two variances are combined into a diagonal $6\times
+6$ positive variance tensor $\Sigma_k$; that is, the variance tensor
+$\Sigma_k$ is specified with two scalar variances, $\sigma_{kx}^2$ and
+$\sigma_{kv}^2$.  This Gaussian blob in 6-space itself orbits on a
+gravitational orbit in the potential; that is it's mean 6-vector
+position in phase space as a function of time is determined by taking
+some 6-vector initial conditions $X_k$ and integrating through time
+along a gravitational orbit.  That is, in addition to the variance
+tensor $\Sigma_k$, the progenitor has a 6-vector position $X(t\given
+X_k)$, parameterized by time $t$ and initial conditions $X_k$.  For
+definiteness, we will define the present day to be $t=0$ (ignoring
+light-travel times, of course), such that all measurements of stars
+$D_n$ are made at $t=0$ and the progenitor initial conditions are set
+at $t=0$.
+
+[define $t_{nk}$ and the likelihood function for everything]
+
+[priors on all easy nuisance parameters]
+
+[Milky Way ``background'' model]
+
+[priors on all hard nuisance parameters]
 
 \section{Experiments}
 
