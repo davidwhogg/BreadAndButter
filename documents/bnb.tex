@@ -170,7 +170,7 @@ shared by every star.
 
 The title of this paper contains the words ``two stars''; the
 likelihood function specified here works with even \emph{one star}.
-What gives?  The fact is it \emph{is} possible to infer parameters
+What gives?  Certainly it \emph{is} possible to infer parameters
 with a single star, but in the one-star case, the phase-space
 structure parameters---unless they are controlled by very strong
 priors---are degenerate with the star's phase-space parameters; these
@@ -193,10 +193,10 @@ Galactocentric distance.  In what follows we adopt for simplicity the
 flat prior $p(t_{nk})=U(t_{nk}\given T,0)$, where $U(x\given a,b)$ is
 the uniform distribution for $x$ between limits $a<x<b$.
 
-The prior on the phase-space position $X_k$ could be drawn from some
+The prior on the phase-space position $X_k$ could be built from some
 kind of maximum-entropy considerations in some baseline potential or
 in the current setting of the model potential parameters.  Or it could
-be drawn from empirical distributions found for known substructures or
+be generated from empirical distributions found for known substructures or
 satellites found in data or simulations of galaxy formation.  For
 simplicity we choose the 3-vector position part of $X_k$ to be drawn
 from the singular isothermal sphere $p(x)\propto |x|^{-2}$ in the
@@ -207,6 +207,13 @@ they also don't matter enormously when the data are informative.  When
 we test the method (below), we will explicitly test in cases where
 these priors are inappropriate, to demonstrate that they don't
 substantially affect the results in realistic situations.
+
+The prior on the progenitor 6-tensor size $\Sigma_k$---which really
+has only two degrees of freedom, $\sigma_x^2$ and $\sigma_v^2$, the
+diagonal elements of the 3-tensor spatial extent and the diagonal
+elements of the 3-tensor velocity extent---must enforce positivity and
+(relatively speaking) ``coldness'' of the structure.  We relatively
+arbitrarily put [HOGG] priors on these with parameters [HOGG].
 
 [Milky Way ``background'' model.  Mixture model.]
 
