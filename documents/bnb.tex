@@ -168,10 +168,45 @@ over the progenitor properties $X_k^{(0)}$ and $\Sigma_k$ are
 performed just once for the whole sample, because these parameters are
 shared by every star.
 
-[technically this likelihood is good for one star.  Why do we require
-  two?  Degeneracies.]
+The title of this paper contains the words ``two stars''; the
+likelihood function specified here works with even \emph{one star}.
+What gives?  The fact is it \emph{is} possible to infer parameters
+with a single star, but in the one-star case, the phase-space
+structure parameters---unless they are controlled by very strong
+priors---are degenerate with the star's phase-space parameters; these
+degeneracies would make the inference uninformative.
 
-[priors on all nuisance parameters.]
+The marginalization integrals require prior pdfs for the
+parameters---or at least the nuisance parameters.  Here the nuisance
+parameters include the 6-vector position $X_k^{(0)}$ of the
+progenitor, the 6-tensor size $\Sigma_k$ of the progenitor, and all
+the times $t_{nk}$:
+
+In the most naive model, the times could be uniformly drawn from the
+lifetime of the progenitor; that is, the times could be drawn from a
+uniform pdf extending from some time $t=T<0$ (many Gyr) in the past to
+the present day $t=0$.  A more sophisticated model might have the
+release times be more likely to occur near pericenter passages; that
+is, if the progenitor has finite eccentricity (as it surely will) then
+the probability of releasing a star is probably a strong function of
+Galactocentric distance.  In what follows we adopt for simplicity the
+flat prior $p(t_{nk})=U(t_{nk}\given T,0)$, where $U(x\given a,b)$ is
+the uniform distribution for $x$ between limits $a<x<b$.
+
+The prior on the phase-space position $X_k$ could be drawn from some
+kind of maximum-entropy considerations in some baseline potential or
+in the current setting of the model potential parameters.  Or it could
+be drawn from empirical distributions found for known substructures or
+satellites found in data or simulations of galaxy formation.  For
+simplicity we choose the 3-vector position part of $X_k$ to be drawn
+from the singular isothermal sphere $p(x)\propto |x|^{-2}$ in the
+range [HOGG]$<|x|<$[HOGG]~kpc and the 3-vector velocity part to be
+drawn from a sperhical (diagonal) Gaussian of velocity dispersion
+[HOGG].  These priors are not really justified by prior knowledge, but
+they also don't matter enormously when the data are informative.  When
+we test the method (below), we will explicitly test in cases where
+these priors are inappropriate, to demonstrate that they don't
+substantially affect the results in realistic situations.
 
 [Milky Way ``background'' model.]
 
@@ -207,6 +242,9 @@ shared by every star.
   nonetheless but what could we do to improve it?  Related to this,
   the progenitor doesn't shrink with time (as it should).  What's up
   with that?]
+
+[We did not assume the potential is static in time.  At least not in
+  general; nothing in the method requires or suggests this.]
 
 [Issues about computation and scaling.]
 
